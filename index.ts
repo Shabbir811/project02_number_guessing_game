@@ -2,6 +2,7 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
+//welcome 
 console.log(chalk.black.bold.underline.overline.bgGreen`welcome dear user let start game `);
 
 
