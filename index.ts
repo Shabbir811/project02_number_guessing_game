@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
-
+let start = true
+while(start){
 //welcome 
 console.log(chalk.black.bold.underline.overline.bgGreen`welcome dear user let start game `);
 
@@ -35,9 +36,18 @@ let usernumber = answer.usernumber;
 if(even === usernumber){
     console.log(chalk.whiteBright.bold.underline.overline.bgGreen`Congratulations!`+chalk.bgBlack.italic.blue` you guessed the right number ${even}`)
 } else{
-    console.log(chalk.white.overline.bgRed.bold`your guess is wrong `+chalk.bold.blue.bgBlack.italic.dim`\n\n to play again:`+chalk.blue`press arrowUpKey +`+chalk.bgBlack.red` enter`);
+    console.log(chalk.white.overline.bgRed.bold`your guess is wrong `+chalk.bold.blue.bgBlack.italic.dim`\n\n to play again:`+chalk.blue`press y +`+chalk.bgBlack.red` enter`);
     
 }
 
+let stop = await inquirer.prompt(
+    {
+        name: "break",
+        type:"confirm",
+        message: "do you play again?",
+        default: false
+    }
+)
+start = stop.break
 
-
+}
