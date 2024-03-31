@@ -1,44 +1,42 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
-import chalk from "chalk";
+console.log(`----------------------- welcome to a number guessing game -------------------------------- \n\n\t\t\t you guess a number between 1 to 10
+-------------------
+-------------------`); //some basic layout
+//step 6: perform while loop again to retsart game
 let start = true;
 while (start) {
-    //welcome 
-    console.log(chalk.black.bold.underline.overline.bgGreen `welcome dear user let start game `);
-    //let we auto generate a even number from pc
-    let randomNumber = Math.floor(Math.random() * 10 + 1);
-    // // create a function which return a even value 
-    function evennumber(even) {
-        if (even % 2 == 0) {
-            return even;
-        }
-        else {
-            return even + 1;
-        }
-    }
-    // let function store in a variable
-    let even = evennumber(randomNumber);
-    //let a number input from user using inquirer
-    let answer = await inquirer.prompt([
-        { name: 'usernumber',
+    //step 1:  store a random number in variable trough math.random()                                                      
+    var randomNum = Math.floor(Math.random() * 10 + 1);
+    //step 2:  let ask a number from a user though inquirer and store that number in a variable 
+    let userNum = await inquirer.prompt({
+        name: "number",
+        type: "number",
+        message: "enter a number to guess",
+    });
+    //step 3:  use while loop to biuld our game's logic  
+    console.log(`------------------------------------------------------- \n\n\t\t\t you guess a number between 1 to 10
+-------------------
+-------------------`); //some basic layout
+    while (userNum.number !== randomNum /*if user and random num is equals  loop is end*/) {
+        //step 4:   re use ranomnumber and usernumber in the while loop
+        var randomNum = Math.floor(Math.random() * 10 + 1);
+        userNum = await inquirer.prompt({
+            name: "number",
             type: "number",
-            message: "enter a even number from blew \n  2 , 4 , 6 , 8 , 10\n\n"
-        }
-    ]);
-    // store a inquirer userinput value in a variable
-    let usernumber = answer.usernumber;
-    //now we add our game's logic in this Even number guessing game
-    if (even === usernumber) {
-        console.log(chalk.whiteBright.bold.underline.overline.bgGreen `Congratulations!` + chalk.bgBlack.italic.blue ` you guessed the right number ${even}`);
+            message: `You guess wrong number try again:  `,
+        });
+        console.log(` correct number is: "${randomNum}"\t  \n`);
     }
-    else {
-        console.log(chalk.white.overline.bgRed.bold `your guess is wrong ` + chalk.bold.blue.bgBlack.italic.dim `\n\n to play again:` + chalk.blue `press y +` + chalk.bgBlack.red ` enter`);
-    }
+    console.log(`======================================================================================================`); // some basic layout
+    //step 5:    print the message to user you guess the right answer 
+    console.log(`\n\ncongratulation! "${randomNum}" you guess the right number\n\n`);
+    console.log(`======================================================================================================`); // some basic layout
+    //step 7: let end while loop ask comformation from user 
     let stop = await inquirer.prompt({
         name: "break",
         type: "confirm",
-        message: "do you play again?",
-        default: false
+        message: "do you want play this game again"
     });
     start = stop.break;
 }
